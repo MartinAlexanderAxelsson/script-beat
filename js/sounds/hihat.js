@@ -70,7 +70,7 @@ function hihat1() {
     gainStage2.connect(hihatMasterVol)
     hihatMasterVol.connect(audio.destination)
     noise.start(0)
-    noise.stop(0 + hihatDecayTime)
+    //noise.stop(0 + hihatDecayTime)
   }
 
   function hhBell() {
