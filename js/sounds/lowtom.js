@@ -62,7 +62,7 @@ function lowtom1() {
     gainStage2.connect(lowtomMasterVol)
     lowtomMasterVol.connect(audio.destination)
     osc1.start(0)
-    osc1.stop(0 + lowtomDecayTime)
+    //osc1.stop(0 + lowtomDecayTime)
   }
 
   function mid() {
@@ -155,7 +155,7 @@ function lowtom1DeviceSpkr() {
     gainStage2.connect(lowtomMasterVol)
     lowtomMasterVol.connect(audio.destination)
     osc1.start(0)
-    osc1.stop(0 + lowtomDecayTime)
+    //osc1.stop(0 + lowtomDecayTime)
   }
 
   function mid() {

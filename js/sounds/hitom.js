@@ -61,7 +61,7 @@ function hitom1() {
     gainStage2.connect(hitomMasterVol)
     hitomMasterVol.connect(audio.destination)
     osc1.start(0)
-    osc1.stop(0 + hitomDecayTime)
+    //osc1.stop(0 + hitomDecayTime)
   }
 
   function mid() {
@@ -155,7 +155,7 @@ function hitom1DeviceSpkr() {
     gainStage2.connect(hitomMasterVol)
     hitomMasterVol.connect(audio.destination)
     osc1.start(0)
-    osc1.stop(0 + hitomDecayTime)
+    //osc1.stop(0 + hitomDecayTime)
   }
 
   function mid() {
@@ -166,10 +166,10 @@ function hitom1DeviceSpkr() {
       gainStage1 = audio.createGain(),
       gainStage2 = audio.createGain()
 
-      // if browser is firefox
+    // if browser is firefox
     if (navigator.userAgent.indexOf("Firefox") != -1) {
-        decay = 40
-      }
+      decay = 40
+    }
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)

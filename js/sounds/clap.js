@@ -76,7 +76,7 @@ function clap1() {
     clapTone.connect(clapMasterVol)
     clapMasterVol.connect(audio.destination)
     noise.start(0)
-    noise.stop(0 + clapDecayTime)
+    //noise.stop(0 + clapDecayTime)
   }
   clapWhiteNoise()
 

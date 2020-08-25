@@ -72,7 +72,7 @@ function snare1() {
     gainStage2.connect(snareMasterVol)
     snareMasterVol.connect(audio.destination)
     noise.start(0)
-    noise.stop(0 + snareDecayTime)
+    //noise.stop(0 + snareDecayTime)
    
   }
 

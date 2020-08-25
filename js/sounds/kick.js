@@ -68,7 +68,7 @@ function kickHeadphones() {
     gainStage2.connect(kickMasterVol)
     kickMasterVol.connect(audio.destination)
     osc1.start(0)
-    osc1.stop(0 + kickDecayTime)
+    //osc1.stop(0 + kickDecayTime)
   }
 
   function mid() {
@@ -164,7 +164,7 @@ function kickHeadphonesFF() {
 
     kickMasterVol.connect(audio.destination)
     osc1.start(0)
-    osc1.stop(0 + kickDecayTime)
+    //osc1.stop(0 + kickDecayTime)
   }
 
   function mid() {
