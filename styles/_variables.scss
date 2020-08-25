@@ -1,0 +1,26 @@
+$breakpoint--1: 420px;
+$breakpoint--2: 1000px;
+
+:root {
+  --mainColor: rgb(236, 230, 213);
+
+  --trackColor1: rgb(245, 240, 240);
+  --trackColor2: rgb(231, 230, 230);
+  --trackColor3: rgb(212, 212, 212);
+  --trackColor4: rgb(185, 185, 185);
+  --trackColor5: rgb(167, 167, 167);
+  --trackColor6: rgb(165, 159, 159);
+  --trackColor7: rgb(134, 134, 133);
+  --trackColor8: rgb(112, 112, 112);
+
+  --trackFlashColor: rgb(205, 232, 241);
+  --instrBtn-Color: rgb(238, 235, 226);
+  --instrBtn-Pressed-Color: rgb(83, 253, 225);
+  --padPressed: rgb(83, 253, 225);
+ --ef: rgba(253, 83, 244, 0.137);
+
+  --darkGrey: rgb(24, 23, 23);
+  --lightGrey: rgb(161, 166, 168);
+  --btnBlue: rgb(33, 166, 243);
+  --border: 2px solid rgb(151, 149, 148);
+}

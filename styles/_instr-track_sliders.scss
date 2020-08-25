@@ -1,0 +1,199 @@
+@import "./variables";
+
+// instrument-track sliders
+.range-input,
+.range-input2 {
+  border-radius: 10vw;
+  margin: 0vw 0vw 0vw 0vw;
+  width: 20vw;
+  -webkit-appearance: none;
+  background: linear-gradient(
+    to right,
+    var(--btnBlue) 0%,
+    var(--btnBlue) 1%,
+    rgb(0, 0, 0) 1%,
+    rgb(0, 0, 0) 100%
+  );
+  @media (min-width: $breakpoint--1) {
+    margin-bottom: 1.5vw;
+    width: 8vw;
+  }
+  @media (min-width: $breakpoint--2) {
+    transform: rotate(270deg);
+    transform: rotate(270deg);
+    border-radius: 10vw;
+    margin: 1.5vw 0vw 2vw 0vw;
+    width: 4vw;
+  }
+}
+
+.range-input:focus,
+.range-input2:focus {
+  outline: none;
+}
+
+// ----------Chrome/Opera------------
+
+.range-input::-webkit-slider-runnable-track,
+.range-input2::-webkit-slider-runnable-track {
+  height: 1vw;
+  cursor: pointer;
+  @media (min-width: $breakpoint--1) {
+    height: 0.5vw;
+  }
+  @media (min-width: $breakpoint--2) {
+    height: 0.2vw;
+  }
+}
+
+.range-input::-webkit-slider-thumb {
+  border: 1vw solid var(--darkGrey);
+  height: 4.5vw;
+  width: 4.5vw;
+  border-radius: 5vw;
+  background: white;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -1.7vw;
+
+  @media (min-width: $breakpoint--1) {
+    border: 0.5vw solid var(--darkGrey);
+    height: 2.5vw;
+    width: 2.5vw;
+    margin-top: -1vw;
+  }
+  @media (min-width: $breakpoint--2) {
+    border: 0.2vw solid var(--darkGrey);
+    height: 1vw;
+    width: 1vw;
+    margin-top: -0.4vw;
+  }
+}
+
+.range-input2::-webkit-slider-thumb {
+  border: 1vw solid var(--btnBlue);
+  height: 4.5vw;
+  width: 4.5vw;
+  border-radius: 5vw;
+  background: white;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -1.7vw;
+  @media (min-width: $breakpoint--1) {
+    border: 0.5vw solid var(--btnBlue);
+    height: 2.5vw;
+    width: 2.5vw;
+    margin-top: -1vw;
+  }
+  @media (min-width: $breakpoint--2) {
+    border: 0.2vw solid var(--btnBlue);
+    height: 1vw;
+    width: 1vw;
+    margin-top: -0.4vw;
+  }
+}
+
+// ----------Firefox------------
+
+@-moz-document url-prefix() {
+  .range-input {
+    margin: 1.5vw 0vw 0.5vw 0vw;
+    height: 1vw;
+    border-radius: 10vw;
+    @media (min-width: $breakpoint--1) {
+      margin: 1.5vw 0vw 1vw 0vw;
+      height: 0.5vw;
+    }
+    @media (min-width: $breakpoint--2) {
+      margin: 1vw 0vw 2vw 0vw;
+      height: 0.3vw;
+    }
+  }
+  .range-input2 {
+    margin: 1.5vw 0vw 1vw 0vw;
+    height: 1vw;
+    border-radius: 10vw;
+    @media (min-width: $breakpoint--1) {
+      margin: 1.5vw 0vw 1vw 0vw;
+      height: 0.5vw;
+    }
+    @media (min-width: $breakpoint--2) {
+      margin: 1vw 0vw 2vw 0vw;
+      height: 0.3vw;
+    }
+  }
+}
+.range-input::-moz-range-thumb {
+  border: 1vw solid var(--darkGrey);
+  height: 3vw;
+  width: 3vw;
+  border-radius: 5vw;
+  background: white;
+  cursor: pointer;
+  @media (min-width: $breakpoint--1) {
+    border: 0.5vw solid var(--darkGrey);
+    height: 1.5vw;
+    width: 1.5vw;
+  }
+  @media (min-width: $breakpoint--2) {
+    border: 0.3vw solid var(--darkGrey);
+    height: 0.6vw;
+    width: 0.6vw;
+  }
+}
+.range-input2::-moz-range-thumb {
+  border: 1vw solid var(--btnBlue);
+  height: 3vw;
+  width: 3vw;
+  border-radius: 5vw;
+  background: white;
+  cursor: pointer;
+  @media (min-width: $breakpoint--1) {
+    border: 0.5vw solid var(--btnBlue);
+    height: 1.5vw;
+    width: 1.5vw;
+  }
+  @media (min-width: $breakpoint--2) {
+    border: 0.3vw solid var(--btnBlue);
+    height: 0.6vw;
+    width: 0.6vw;
+  }
+}
+
+// ----------Edge/IE------------
+// .range-input::-ms-track {
+//   width: 100%;
+//   height: 2px;
+//   cursor: pointer;
+//   background: transparent;
+//   border-color: transparent;
+//   color: transparent;
+// }
+// .range-input::-ms-fill-lower {
+//   background: #2497e3;
+//   border: 0px solid #000000;
+//   border-radius: 2px;
+//   box-shadow: 0px 0px 0px #000000;
+// }
+// .range-input::-ms-fill-upper {
+//   background: #2497e3;
+//   border: 0px solid #000000;
+//   border-radius: 2px;
+//   box-shadow: 0px 0px 0px #000000;
+// }
+// .range-input::-ms-thumb {
+//   margin-top: 1px;
+//   box-shadow: 0px 0px 0px #000000;
+//   border: 1px solid #2497e3;
+//   height: 12px;
+//   width: 12px;
+//   border-radius: 50px;
+//   background: #a1d0ff;
+//   cursor: pointer;
+// }
+// .range-input:focus::-ms-fill-lower {
+//   background: #2497e3;
+// }
+// .range-input:focus::-ms-fill-upper {
+//   background: #2497e3;
+// }

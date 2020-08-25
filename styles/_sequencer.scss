@@ -1,0 +1,290 @@
+@import "./variables";
+
+// main container for sequencer and instr tracks
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  @media (min-width: $breakpoint--1) {
+    flex-direction: column;
+  }
+  @media (min-width: $breakpoint--2) {
+    flex-direction: row;
+  }
+
+  &__sequencer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(0deg, var(--trackColor8) 0%, var(--trackColor1) 100%);
+    @media (min-width: $breakpoint--1) {
+      flex-direction: row;
+      background: var(--mainColor);
+    }
+    @media (min-width: $breakpoint--2) {
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-content: center;
+      padding: 1vw;
+      margin-left: 9vw;
+      border-radius: 0px 0px 1vw 1vw;
+    }
+    &__instrument-track {
+      margin: 0vw 0vw 0vw 0vw;
+      @media (min-width: $breakpoint--1) {
+        flex-direction: column;
+        margin-top: 1vw;
+      }
+      @media (min-width: $breakpoint--2) {
+        flex-direction: row;
+        border-radius: 0.5vw;
+        width: 80vw;
+        height: 7vw;
+        margin-top: 0.6vw;
+        background: var(--trackColor3);
+      }
+      &-ctrls {
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        height: 10vw;
+        margin: 10vw 0vw 1vw 0vw;
+        @media (min-width: $breakpoint--1) {
+          flex-direction: column;
+          width: 9vw;
+          height: 40vw;
+          margin: 8vw 0vw 0vw 0vw;
+          padding: 0vw 1.3vw 0vw 1.3vw;
+        }
+        @media (min-width: $breakpoint--2) {
+          flex-direction: row;
+          width: fit-content;
+          width: 20vw;
+          height: 7vw;
+          margin: 0vw 0vw 0vw 0vw;
+          padding: 0vw 0vw 0vw 0vw;
+        }
+
+        &__instrument-btn {
+          outline: none;
+          align-self: center;
+          width: 18vw;
+          height: 8vw;
+          margin-left: 3vw;
+          margin-top: -2vw;
+          border: 0.1vw solid black;
+          background: var(--instrBtn-Color);
+          box-shadow: inset -2px -2px #665, inset 2px 2px rgb(255, 255, 255);
+          font-family: "Baloo Chettan 2", cursive;
+          font-size: 12px;
+          text-align: center;
+          color: var(--darkGrey);
+          @media (min-width: $breakpoint--1) {
+            order: 1;
+            width: 9vw;
+            height: 9vw;
+            margin-left: 0vw;
+            margin-top: 0.5vw;
+            border: 1px solid black;
+            font-size: 1.8vw;
+          }
+          @media (min-width: $breakpoint--2) {
+            order: unset;
+            width: 5vw;
+            height: 5vw;
+            margin: 1vw;
+            font-size: 1.2vw;
+          }
+        }
+
+        &__instrument-btn:active {
+          box-shadow: 1px 1px #665;
+          transform: translateY(2px);
+          color: var(--instrBtn-Pressed-Color);
+        }
+
+        &__range-input-label {
+          font-family: "Nunito", sans-serif;
+          font-weight: bolder;
+          font-size: 12px;
+          text-align: center;
+          color: rgb(31, 30, 30);
+          margin: 0.5vw 1vw 0vw 4vw;
+          @media (min-width: $breakpoint--1) {
+            margin: 1.5vw 0vw 1vw 0vw;
+            font-weight: bolder;
+          }
+          @media (min-width: $breakpoint--2) {
+            font-size: 1vw;
+          }
+        }
+
+        &__range-input-label:focus-within {
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+#kick-ctrls {
+  opacity: 1;
+  background: var(--trackColor1);
+  @media (min-width: $breakpoint--2) {
+    background: none;
+  }
+}
+#kickdrum-pads {
+  z-index: 1;
+  background: var(--trackColor1);
+  @media (min-width: $breakpoint--2) {
+    background: none;
+  }
+}
+
+#snare-ctrls,
+#snaredrum-pads {
+  background: var(--trackColor2);
+  @media (min-width: $breakpoint--2) {
+    background: none;
+  }
+}
+#clap-ctrls,
+#clap-pads {
+  background: var(--trackColor3);
+  @media (min-width: $breakpoint--2) {
+    background: none;
+  }
+}
+#snap-ctrls,
+#fingersnap-pads {
+  background: var(--trackColor4);
+  @media (min-width: $breakpoint--2) {
+    background: none;
+  }
+}
+#hihat-ctrls,
+#hihat-pads {
+  background: var(--trackColor5);
+  @media (min-width: $breakpoint--2) {
+    background: none;
+  }
+}
+#cymbal-ctrls,
+#cymbal-pads {
+  background: var(--trackColor6);
+  @media (min-width: $breakpoint--2) {
+    background: none;
+  }
+}
+#lowtom-ctrls,
+#lowtom-pads {
+  background: var(--trackColor7);
+  @media (min-width: $breakpoint--2) {
+    background: none;
+  }
+}
+#hitom-ctrls,
+#hitom-pads {
+  background: var(--trackColor8);
+  @media (min-width: $breakpoint--2) {
+    background: none;
+  }
+}
+
+// main container for sequencer pads
+.sequencer-pads-container {
+  @media (min-width: $breakpoint--1) {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: $breakpoint--2) {
+    order: 0;
+    flex-direction: column;
+  }
+
+  // instrument pads
+  &__pads {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100vw;
+    height: 10vw;
+    border-radius: 0.8vw 0.8vw 0vw 0vw;
+    margin: 0vw 0vw 11vw -100vw;
+    @media (min-width: $breakpoint--1) {
+      position: absolute;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 92.7vw;
+      height: 9vw;
+      border-radius: 0.8vw 0.8vw 0vw 0vw;
+      margin: 0;
+    }
+    @media (min-width: $breakpoint--2) {
+      position: unset;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 60vw;
+      height: 6.8vw;
+      padding-right: 1vw;
+      margin: 0.7vw 0vw 0.1vw -62.2vw;
+    }
+  }
+
+  &__pads button {
+    outline: none;
+    border-radius: 0.8vw;
+    width: 6vw;
+    height: 6vw;
+    margin: 0;
+    padding: 1px;
+    background: white;
+    border: 2px solid rgb(151, 149, 148);
+
+    @media (min-width: $breakpoint--1) {
+      width: 5vw;
+      height: 5vw;
+    }
+    @media (min-width: $breakpoint--2) {
+      border-radius: 0.6vw;
+      width: 3.5vw;
+      height: 3.5vw;
+      margin: 0vw 0vw 0vw 0vw;
+      padding: 0;
+    }
+  }
+  &__pads button:nth-child(4n -3) {
+    background-color: rgb(237, 252, 201);
+  }
+  &__pads button[aria-checked="true"] {
+    background-color: var(--padPressed);
+  }
+}
+
+.endnotes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__text {
+    padding: 1vw;
+    font-family: "Nunito", sans-serif;
+    font-size: 13.5px;
+    text-align: center;
+    color: var(--trackColor8);
+    &__wAApi-link {
+      text-decoration: none;
+      color: black;
+    }
+  }
+  &__github-link {
+    padding-bottom: 4vw;
+    &__logo {
+      width: 90px;
+    }
+  }
+}

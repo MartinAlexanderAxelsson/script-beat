@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="./styles/style_sliders.css" /> -->
+    <!-- <link rel="stylesheet" href="./styles/style.css" /> -->
+    <!-- <link rel="stylesheet" href="./styles/style-mobile.css" />
+    <link rel="stylesheet" href="./styles/sliders-mobile.css" /> -->
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap"
+      rel="stylesheet"
+    />
+    <title>SCRIPT///BEAT</title>
+  </head>
+  <body class="body">
+    <section class="main-ctrls">
+      <div class="main-ctrls__logo">
+        <img
+          class="main-ctrls__logo-img-mobile"
+          src="./images/SB_Logo_Mobile.svg"
+          alt="logo-mobile"
+        />
+        <img
+          class="main-ctrls__logo-img-desktop"
+          src="./images/SB_Logo_Desktop.svg"
+          alt="logo-desktop"
+        />
+      </div>
+      <button data-playing="false"></button>
+
+      <p class="main-ctrls__bpm-value" id="bpm-value">120</p>
+      <label class="main-ctrls__bpm-label" for="bpm-value">
+        <input
+          class="main-ctrls__bpm-label-slider"
+          name="bpm"
+          id="bpm"
+          type="range"
+          min="60"
+          max="180"
+          value="120"
+          step="0.1"
+        />BPM</label
+      >
+      <label class="main-ctrls__sound-outpt-switch"
+        ><p class="main-ctrls__sound-outpt-switch__spkr-text" id="laptop">
+          DEVICE SPKR
+        </p>
+        <p class="main-ctrls__sound-outpt-switch__hdphns-text" id="headphones">
+          HEADPHONES
+        </p>
+        <input type="checkbox" id="switch-env-btn" />
+        <span class="main-ctrls__sound-outpt-switch__slider round"></span>
+      </label>
+      <label class="main-ctrls__clear-button-label" for="clear-button"
+        >CLEAR PATTERNS
+        <button class="main-ctrls__clear-button" id="clear-btn"></button
+      ></label>
+    </section>
+
+    <div class="main-container">
+      <div class="main-container__sequencer" id="tracks">
+        <section class="main-container__sequencer__instrument-track">
+          <section
+            class="main-container__sequencer__instrument-track-ctrls"
+            id="kick-ctrls"
+          >
+            <button
+              class="main-container__sequencer__instrument-track-ctrls__instrument-btn"
+              id="kick"
+              role="switch"
+              aria-checked="false"
+            >
+              KICK
+            </button>
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="kick-volume"
+              ><input
+                type="range"
+                name="slider"
+                id="kick-volume"
+                class="range-input"
+                min="0"
+                max="1"
+                value="0.5"
+                step="0.01"
+              />
+              <br />
+              Volume
+            </label>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="kick-click"
+              ><input
+                type="range"
+                id="kick-click"
+                class="range-input"
+                min="0"
+                max="1.6"
+                value="1"
+                step="0.01"
+              />
+              <br />
+              Click</label
+            >
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="kick-decay"
+              ><input
+                type="range"
+                id="kick-decay"
+                class="range-input"
+                min="180"
+                max="1000"
+                value="250"
+                step="0.01"
+              />
+              <br />
+              Decay</label
+            >
+          </section>
+        </section>
+
+        <section class="main-container__sequencer__instrument-track">
+          <section
+            class="main-container__sequencer__instrument-track-ctrls"
+            id="snare-ctrls"
+          >
+            <button
+              class="main-container__sequencer__instrument-track-ctrls__instrument-btn"
+              id="snare"
+            >
+              SNARE</button
+            ><label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="snare-volume"
+              ><input
+                type="range"
+                id="snare-volume"
+                class="range-input"
+                min="0"
+                max="0.8"
+                value="0.4"
+                step="0.01"
+              />
+              <br />
+              Volume
+            </label>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="snare-snap"
+              ><input
+                type="range"
+                id="snare-snap"
+                class="range-input"
+                min="0"
+                max="2"
+                value="0.8"
+                step="0.01"
+              />
+              <br />
+              Snap</label
+            >
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="snare-decay"
+              ><input
+                type="range"
+                id="snare-decay"
+                class="range-input"
+                min="0"
+                max="1000"
+                value="100"
+                step="1"
+              />
+              <br />
+              Decay</label
+            >
+          </section>
+        </section>
+
+        <section class="main-container__sequencer__instrument-track">
+          <section
+            class="main-container__sequencer__instrument-track-ctrls"
+            id="clap-ctrls"
+          >
+            <button
+              class="main-container__sequencer__instrument-track-ctrls__instrument-btn"
+              id="clap"
+            >
+              CLAP
+            </button>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="clap-volume"
+              ><input
+                type="range"
+                id="clap-volume"
+                class="range-input"
+                min="0"
+                max="1"
+                value="0.6"
+                step="0.01"
+              />
+              <br />
+              Volume
+            </label>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="clap-tone"
+              ><input
+                type="range"
+                id="clap-tone"
+                class="range-input"
+                min="1000"
+                max="4000"
+                value="2200"
+                step="1"
+              />
+              <br />
+              Tone</label
+            >
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="clap-decay"
+              ><input
+                type="range"
+                id="clap-decay"
+                class="range-input"
+                min="0"
+                max="200"
+                value="60"
+                step="1"
+              />
+              <br />
+              Decay</label
+            >
+          </section>
+        </section>
+
+        <section class="main-container__sequencer__instrument-track">
+          <section
+            class="main-container__sequencer__instrument-track-ctrls"
+            id="snap-ctrls"
+          >
+            <button
+              class="main-container__sequencer__instrument-track-ctrls__instrument-btn"
+              id="fingersnap"
+            >
+              SNAP
+            </button>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="fingersnap-volume"
+              ><input
+                type="range"
+                id="fingersnap-volume"
+                class="range-input"
+                min="0"
+                max="3"
+                value="2"
+                step="0.01"
+              />
+              <br />
+              Volume
+            </label>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="fingersnap-filter"
+              ><input
+                type="range"
+                id="fingersnap-filter"
+                class="range-input"
+                min="1000"
+                max="5000"
+                value="2000"
+                step="1"
+              />
+              <br />
+              Filter</label
+            >
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="fingersnap-reverb"
+              ><input
+                type="range"
+                id="fingersnap-reverb"
+                class="range-input"
+                min="0"
+                max="0.5"
+                value="0"
+                step="0.01"
+              />
+              <br />
+              Reverb</label
+            >
+          </section>
+        </section>
+
+        <section class="main-container__sequencer__instrument-track">
+          <section
+            class="main-container__sequencer__instrument-track-ctrls"
+            id="hihat-ctrls"
+          >
+            <button
+              class="main-container__sequencer__instrument-track-ctrls__instrument-btn"
+              id="hihat"
+            >
+              HI HAT
+            </button>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="hihat-volume"
+              ><input
+                type="range"
+                id="hihat-volume"
+                class="range-input"
+                min="0"
+                max="1"
+                value="0.3"
+                step="0.01"
+              />
+              <br />
+              Volume
+            </label>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="hihat-bell"
+              ><input
+                type="range"
+                id="hihat-bell"
+                class="range-input"
+                min="0"
+                max="2"
+                value="0.2"
+                step="0.01"
+              />
+              <br />
+              Metal</label
+            >
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="hihat-decay"
+              ><input
+                type="range"
+                id="hihat-decay"
+                class="range-input"
+                min="20"
+                max="800"
+                value="40"
+                step="1"
+              />
+              <br />
+              Decay</label
+            >
+          </section>
+        </section>
+
+        <section class="main-container__sequencer__instrument-track">
+          <section
+            class="main-container__sequencer__instrument-track-ctrls"
+            id="cymbal-ctrls"
+          >
+            <button
+              class="main-container__sequencer__instrument-track-ctrls__instrument-btn"
+              id="cymbal"
+            >
+              RIDE
+            </button>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="cymbal-volume"
+              ><input
+                type="range"
+                id="cymbal-volume"
+                class="range-input"
+                min="0"
+                max="1"
+                value="0.6"
+                step="0.01"
+              />
+              <br />
+              Volume
+            </label>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="cymbal-bell"
+              ><input
+                type="range"
+                id="cymbal-bell"
+                class="range-input"
+                min="0"
+                max="2"
+                value="0.4"
+                step="0.01"
+              />
+              <br />
+              Bell</label
+            >
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="cymbal-decay"
+              ><input
+                type="range"
+                id="cymbal-decay"
+                class="range-input"
+                min="0"
+                max="3000"
+                value="1000"
+                step="10"
+              />
+              <br />
+              Decay</label
+            >
+          </section>
+        </section>
+
+        <section class="main-container__sequencer__instrument-track">
+          <section
+            class="main-container__sequencer__instrument-track-ctrls"
+            id="lowtom-ctrls"
+          >
+            <button
+              class="main-container__sequencer__instrument-track-ctrls__instrument-btn"
+              id="lowtom"
+            >
+              LOW TOM
+            </button>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="lowtom-volume"
+              ><input
+                type="range"
+                id="lowtom-volume"
+                class="range-input"
+                min="0"
+                max="1"
+                value="0.5"
+                step="0.01"
+              />
+              <br />
+              Volume
+            </label>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="lowtom-click"
+              ><input
+                type="range"
+                id="lowtom-click"
+                class="range-input"
+                min="0"
+                max="1.6"
+                value="1"
+                step="0.01"
+              />
+              <br />
+              Click</label
+            >
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="lowtom-decay"
+              ><input
+                type="range"
+                id="lowtom-decay"
+                class="range-input"
+                min="50"
+                max="1000"
+                value="150"
+                step="0.01"
+              />
+              <br />
+              Decay</label
+            >
+          </section>
+        </section>
+
+        <section class="main-container__sequencer__instrument-track">
+          <section
+            class="main-container__sequencer__instrument-track-ctrls"
+            id="hitom-ctrls"
+          >
+            <button
+              class="main-container__sequencer__instrument-track-ctrls__instrument-btn"
+              id="hitom"
+            >
+              HI TOM
+            </button>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="hitom-volume"
+              ><input
+                type="range"
+                id="hitom-volume"
+                class="range-input"
+                min="0"
+                max="1"
+                value="0.5"
+                step="0.01"
+              />
+              <br />
+              Volume
+            </label>
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="hitom-click"
+              ><input
+                type="range"
+                id="hitom-click"
+                class="range-input"
+                min="0"
+                max="1.6"
+                value="1"
+                step="0.01"
+              />
+              <br />
+              Click</label
+            >
+
+            <label
+              class="main-container__sequencer__instrument-track-ctrls__range-input-label"
+              for="hitom-decay"
+              ><input
+                type="range"
+                id="hitom-decay"
+                class="range-input"
+                min="50"
+                max="1000"
+                value="140"
+                step="0.01"
+              />
+              <br />
+              Decay</label
+            >
+          </section>
+        </section>
+        <section class="main-container__sequencer__instrument-track"></section>
+      </div>
+      <section class="sequencer-pads-container">
+        <section
+          class="sequencer-pads-container__pads"
+          id="kickdrum-pads"
+        ></section>
+        <section
+          class="sequencer-pads-container__pads"
+          id="snaredrum-pads"
+        ></section>
+        <section
+          class="sequencer-pads-container__pads"
+          id="clap-pads"
+        ></section>
+        <section
+          class="sequencer-pads-container__pads"
+          id="fingersnap-pads"
+        ></section>
+        <section
+          class="sequencer-pads-container__pads"
+          id="hihat-pads"
+        ></section>
+        <section
+          class="sequencer-pads-container__pads"
+          id="cymbal-pads"
+        ></section>
+        <section
+          class="sequencer-pads-container__pads"
+          id="lowtom-pads"
+        ></section>
+        <section
+          class="sequencer-pads-container__pads"
+          id="hitom-pads"
+        ></section>
+      </section>
+    </div>
+    <div class="endnotes">
+      <div class="endnotes__text">
+        All sounds generated using Javascript and
+        <a
+          class="endnotes__text__wAApi-link"
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API"
+          >&nbsp;Web Audio API</a
+        >
+      </div>
+      <a class="endnotes__github-link" href="">
+        <img
+          class="endnotes__github-link__logo"
+          src="./images/GitHub_Logo.png"
+          alt="github-logo"
+      /></a>
+    </div>
+    <script src="./js/elements.js"></script>
+    <script src="./js/sequencer.js"></script>
+    <script src="./js/draw-seq-btns.js"></script>
+
+    <script src="./js/style-elements.js"></script>
+    <script src="./js/sounds/kick.js"></script>
+    <script src="./js/sounds/snare.js"></script>
+    <script src="./js/sounds/clap.js"></script>
+    <script src="./js/sounds/snap.js"></script>
+    <script src="./js/sounds/hihat.js"></script>
+    <script src="./js/sounds/cymbal.js"></script>
+    <script src="./js/sounds/lowtom.js"></script>
+    <script src="./js/sounds/hitom.js"></script>
+  </body>
+</html>
