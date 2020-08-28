@@ -9,6 +9,7 @@ let fSnapFilter = audio.createBiquadFilter()
 fSnapFilter.type = "lowpass"
 
 fingersnapBtn.addEventListener("click", function () {
+  fingersnapMasterVol.connect(audio.destination)
   if (navigator.userAgent.indexOf("Firefox") != -1) {
     fingersnapSoundFF()
   } else {
@@ -79,7 +80,7 @@ function fingersnapSound() {
     gainStage2.connect(fSnapFilter)
     gainStage2.connect(fSnapReverbGain)
     fSnapFilter.connect(fingersnapMasterVol)
-    fingersnapMasterVol.connect(audio.destination)
+
     noise.start(0)
     noise.stop(audio.currentTime + decay)
   }
@@ -118,7 +119,7 @@ function fingersnapSound() {
       gainStage2.connect(fSnapReverbGain)
       gainStage2.connect(fSnapFilter)
       fSnapFilter.connect(fingersnapMasterVol)
-      fingersnapMasterVol.connect(audio.destination)
+     
       osc.start(0)
       osc.stop(audio.currentTime + decay)
     }
@@ -197,7 +198,7 @@ function fingersnapSoundFF() {
     gainStage2.connect(fSnapFilter)
     gainStage2.connect(fSnapReverbGain)
     fSnapFilter.connect(fingersnapMasterVol)
-    fingersnapMasterVol.connect(audio.destination)
+   
     noise.start(0)
     noise.stop(audio.currentTime + decay)
   }
@@ -236,7 +237,7 @@ function fingersnapSoundFF() {
       gainStage2.connect(fSnapReverbGain)
       gainStage2.connect(fSnapFilter)
       fSnapFilter.connect(fingersnapMasterVol)
-      fingersnapMasterVol.connect(audio.destination)
+    
       osc.start(0)
       osc.stop(audio.currentTime + decay)
     }

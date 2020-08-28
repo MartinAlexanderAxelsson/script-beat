@@ -3,6 +3,7 @@ const snareSnap = audio.createGain()
 let snareDecayTime = 100
 
 snareBtn.addEventListener("click", function () {
+  snareMasterVol.connect(audio.destination)
   snare1()
   instrumentHit(1)
 })
@@ -45,14 +46,13 @@ function snare1() {
 
     noise.buffer = buffer
     let attack = 0,
-   
       envelope = audio.createGain(),
       gainStage1 = audio.createGain(),
       gainStage2 = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
-   
+
     envelope.gain.linearRampToValueAtTime(
       0,
       audio.currentTime + snareDecayTime / 1000
@@ -70,10 +70,9 @@ function snare1() {
     gainStage1.connect(gainStage2)
 
     gainStage2.connect(snareMasterVol)
-    snareMasterVol.connect(audio.destination)
+
     noise.start(0)
     //noise.stop(0 + snareDecayTime)
-   
   }
 
   function smack() {
@@ -104,7 +103,7 @@ function snare1() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(snareSnap)
     snareSnap.connect(snareMasterVol)
-    snareMasterVol.connect(audio.destination)
+  
     osc.start(0)
     osc.stop(audio.currentTime + decay)
   }
@@ -136,7 +135,7 @@ function snare1() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(snareSnap)
     snareSnap.connect(snareMasterVol)
-    snareMasterVol.connect(audio.destination)
+ 
     osc.start(0)
     osc.stop(audio.currentTime + decay)
   }

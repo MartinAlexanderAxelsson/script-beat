@@ -3,6 +3,7 @@ const cymbalBell = audio.createGain()
 let cymbalDecayTime = 1000
 
 cymbalBtn.addEventListener("click", function () {
+  cymbalMasterVol.connect(audio.destination)
   cymbal1()
   instrumentHit(5)
 })
@@ -65,7 +66,7 @@ function cymbal1() {
     cymbalHpFilter.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(cymbalMasterVol)
-    cymbalMasterVol.connect(audio.destination)
+
     noise.start(0)
     noise.stop(audio.currentTime + decay)
   }
@@ -110,9 +111,9 @@ function cymbal1() {
       bPFilter.connect(gainStage1)
       gainStage1.connect(gainStage2)
       gainStage2.connect(cymbalMasterVol)
-      cymbalMasterVol.connect(audio.destination)
+
       osc4.start(0)
-      osc4.stop(0 + cymbalDecayTime)
+      //   osc4.stop(0 + cymbalDecayTime)
     })
   }
 
@@ -143,7 +144,7 @@ function cymbal1() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(cymbalBell)
     cymbalBell.connect(cymbalMasterVol)
-    cymbalMasterVol.connect(audio.destination)
+
     osc.start(0)
     osc.stop(audio.currentTime + decay)
   }

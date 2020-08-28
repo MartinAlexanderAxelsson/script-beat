@@ -3,6 +3,7 @@ const lowtomClick = audio.createGain()
 let lowtomDecayTime = 150
 
 lowtomBtn.addEventListener("click", function () {
+  lowtomMasterVol.connect(audio.destination)
   if (switchEnvBtn.checked == true) {
     lowtom1DeviceSpkr()
   } else {
@@ -60,7 +61,7 @@ function lowtom1() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(lowtomMasterVol)
-    lowtomMasterVol.connect(audio.destination)
+
     osc1.start(0)
     //osc1.stop(0 + lowtomDecayTime)
   }
@@ -86,7 +87,7 @@ function lowtom1() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(lowtomMasterVol)
-    lowtomMasterVol.connect(audio.destination)
+   
     osc2.start(0)
     osc2.stop(audio.currentTime + decay)
   }
@@ -119,7 +120,7 @@ function lowtom1() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(lowtomClick)
     lowtomClick.connect(lowtomMasterVol)
-    lowtomMasterVol.connect(audio.destination)
+ 
     osc3.start(0)
     osc3.stop(audio.currentTime + decay)
   }
@@ -153,7 +154,7 @@ function lowtom1DeviceSpkr() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(lowtomMasterVol)
-    lowtomMasterVol.connect(audio.destination)
+  
     osc1.start(0)
     //osc1.stop(0 + lowtomDecayTime)
   }
@@ -184,7 +185,7 @@ function lowtom1DeviceSpkr() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(lowtomMasterVol)
-    lowtomMasterVol.connect(audio.destination)
+   
     osc2.start(0)
     osc2.stop(audio.currentTime + decay)
   }
@@ -222,7 +223,7 @@ function lowtom1DeviceSpkr() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(lowtomClick)
     lowtomClick.connect(lowtomMasterVol)
-    lowtomMasterVol.connect(audio.destination)
+  
     osc3.start(0)
     osc3.stop(audio.currentTime + decay)
   }

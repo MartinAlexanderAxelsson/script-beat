@@ -3,6 +3,7 @@ const hitomClick = audio.createGain()
 let hitomDecayTime = 140
 
 hitomBtn.addEventListener("click", function () {
+  hitomMasterVol.connect(audio.destination)
   if (switchEnvBtn.checked == true) {
     hitom1DeviceSpkr()
   } else {
@@ -59,7 +60,7 @@ function hitom1() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(hitomMasterVol)
-    hitomMasterVol.connect(audio.destination)
+
     osc1.start(0)
     //osc1.stop(0 + hitomDecayTime)
   }
@@ -85,7 +86,7 @@ function hitom1() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(hitomMasterVol)
-    hitomMasterVol.connect(audio.destination)
+   
     osc2.start(0)
     osc2.stop(audio.currentTime + decay)
   }
@@ -118,7 +119,7 @@ function hitom1() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(hitomClick)
     hitomClick.connect(hitomMasterVol)
-    hitomMasterVol.connect(audio.destination)
+  
     osc3.start(0)
     osc3.stop(audio.currentTime + decay)
   }
@@ -153,7 +154,7 @@ function hitom1DeviceSpkr() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(hitomMasterVol)
-    hitomMasterVol.connect(audio.destination)
+ 
     osc1.start(0)
     //osc1.stop(0 + hitomDecayTime)
   }
@@ -184,7 +185,7 @@ function hitom1DeviceSpkr() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(hitomMasterVol)
-    hitomMasterVol.connect(audio.destination)
+ 
     osc2.start(0)
     osc2.stop(audio.currentTime + decay)
   }
@@ -222,7 +223,7 @@ function hitom1DeviceSpkr() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(hitomClick)
     hitomClick.connect(hitomMasterVol)
-    hitomMasterVol.connect(audio.destination)
+  
     osc3.start(0)
     osc3.stop(audio.currentTime + decay)
   }

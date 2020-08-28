@@ -10,6 +10,7 @@ clapReverbFilter.type = "lowpass"
 clapReverbFilter.frequency.value = 3000
 
 clapBtn.addEventListener("click", function () {
+  clapMasterVol.connect(audio.destination)
   clap1()
   instrumentHit(2)
 })
@@ -74,7 +75,7 @@ function clap1() {
     gainStage.connect(clapTone)
     gainStage.connect(clapReverbGain)
     clapTone.connect(clapMasterVol)
-    clapMasterVol.connect(audio.destination)
+   
     noise.start(0)
     //noise.stop(0 + clapDecayTime)
   }
@@ -119,9 +120,9 @@ function clap1() {
       gainStage.connect(clapTone)
       gainStage.connect(clapReverbGain)
       clapTone.connect(clapMasterVol)
-      clapMasterVol.connect(audio.destination)
+    
       noise.start(0)
-      noise.stop(0 + clapDecayTime)
+    //   noise.stop(0 + clapDecayTime)
     }
     clapWhiteNoise2()
   }, 10)

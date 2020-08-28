@@ -3,6 +3,7 @@ const kickClick = audio.createGain()
 let kickDecayTime = 250
 
 kickBtn.addEventListener("click", function () {
+  kickMasterVol.connect(audio.destination)
   if (switchEnvBtn.checked == true) {
     kickDeviceSpkr()
   } else {
@@ -66,7 +67,7 @@ function kickHeadphones() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(kickMasterVol)
-    kickMasterVol.connect(audio.destination)
+
     osc1.start(0)
     //osc1.stop(0 + kickDecayTime)
   }
@@ -92,7 +93,7 @@ function kickHeadphones() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(kickMasterVol)
-    kickMasterVol.connect(audio.destination)
+  
     osc2.start(0)
     osc2.stop(audio.currentTime + decay)
   }
@@ -126,7 +127,7 @@ function kickHeadphones() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(kickClick)
     kickClick.connect(kickMasterVol)
-    kickMasterVol.connect(audio.destination)
+   
     osc3.start(0)
     osc3.stop(audio.currentTime + decay)
   }
@@ -162,7 +163,6 @@ function kickHeadphonesFF() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(kickMasterVol)
 
-    kickMasterVol.connect(audio.destination)
     osc1.start(0)
     //osc1.stop(0 + kickDecayTime)
   }
@@ -192,7 +192,7 @@ function kickHeadphonesFF() {
     lowpass.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(kickMasterVol)
-    kickMasterVol.connect(audio.destination)
+
     osc2.start(0)
     osc2.stop(audio.currentTime + decay)
   }
@@ -228,7 +228,7 @@ function kickHeadphonesFF() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(kickClick)
     kickClick.connect(kickMasterVol)
-    kickMasterVol.connect(audio.destination)
+   
     osc3.start(0)
     osc3.stop(audio.currentTime + decay)
 
@@ -269,7 +269,7 @@ function kickDeviceSpkr() {
     envelope.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(kickMasterVol)
-    kickMasterVol.connect(audio.destination)
+  
     osc1.start(0)
     osc1.stop(audio.currentTime + decay)
   }
@@ -300,7 +300,7 @@ function kickDeviceSpkr() {
     envelope2.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(kickMasterVol)
-    kickMasterVol.connect(audio.destination)
+    
     osc2.start(0)
     osc2.stop(audio.currentTime + decay)
   }
@@ -336,7 +336,7 @@ function kickDeviceSpkr() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(kickClick)
     kickClick.connect(kickMasterVol)
-    kickMasterVol.connect(audio.destination)
+  
     osc3.start(0)
     osc3.stop(audio.currentTime + decay)
 

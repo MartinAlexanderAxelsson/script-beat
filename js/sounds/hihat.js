@@ -3,6 +3,7 @@ const hihatBell = audio.createGain()
 let hihatDecayTime = 40
 
 hihatBtn.addEventListener("click", function () {
+  hihatMasterVol.connect(audio.destination)
   hihat1()
   instrumentHit(4)
 })
@@ -68,7 +69,7 @@ function hihat1() {
     hhNoiseFilter.connect(gainStage1)
     gainStage1.connect(gainStage2)
     gainStage2.connect(hihatMasterVol)
-    hihatMasterVol.connect(audio.destination)
+
     noise.start(0)
     //noise.stop(0 + hihatDecayTime)
   }
@@ -101,8 +102,7 @@ function hihat1() {
     gainStage1.connect(gainStage2)
     gainStage2.connect(hihatBell)
     hihatBell.connect(hihatMasterVol)
-    hihatMasterVol.connect(audio.destination)
-
+    
     osc.start(0)
     osc.stop(audio.currentTime + decay)
   }
