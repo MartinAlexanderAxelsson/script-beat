@@ -1,6 +1,6 @@
 let audio = new (window.AudioContext || window.webkitAudioContext)({
   latencyHint: "interactive",
-  sampleRate: 44100,
+  sampleRate: 33000,
 })
 
 let tempo = 120.0
@@ -36,8 +36,6 @@ allPadBtns.forEach((el) => {
   )
 })
 
-// TODO find perfect mix between lookahead (how freqently scheduling function is called (in milliseconds))
-// and scheduleAheadTime (How far ahead to schedule audio in seconds)
 const lookahead = 15.0
 const scheduleAheadTime = 0.1
 
@@ -66,7 +64,6 @@ function scheduleNote(beatNumber, time) {
       .querySelectorAll("button")
       [currentNote].getAttribute("aria-checked") === "true"
   ) {
-    kickMasterVol.connect(audio.destination)
     if (switchEnvBtn.checked == true) {
       kickDeviceSpkr()
     } else {
@@ -83,7 +80,7 @@ function scheduleNote(beatNumber, time) {
       .querySelectorAll("button")
       [currentNote].getAttribute("aria-checked") === "true"
   ) {
-    snareMasterVol.connect(audio.destination)
+
     snare1()
     instrumentHit(1)
   }
@@ -92,7 +89,7 @@ function scheduleNote(beatNumber, time) {
       .querySelectorAll("button")
       [currentNote].getAttribute("aria-checked") === "true"
   ) {
-    clapMasterVol.connect(audio.destination)
+   
     clap1()
     instrumentHit(2)
   }
@@ -101,7 +98,7 @@ function scheduleNote(beatNumber, time) {
       .querySelectorAll("button")
       [currentNote].getAttribute("aria-checked") === "true"
   ) {
-    fingersnapMasterVol.connect(audio.destination)
+  
     if (navigator.userAgent.indexOf("Firefox") != -1) {
       fingersnapSoundFF()
     } else {
@@ -114,7 +111,7 @@ function scheduleNote(beatNumber, time) {
       .querySelectorAll("button")
       [currentNote].getAttribute("aria-checked") === "true"
   ) {
-    hihatMasterVol.connect(audio.destination)
+  
     hihat1()
     instrumentHit(4)
   }
@@ -123,7 +120,7 @@ function scheduleNote(beatNumber, time) {
       .querySelectorAll("button")
       [currentNote].getAttribute("aria-checked") === "true"
   ) {
-    cymbalMasterVol.connect(audio.destination)
+
     cymbal1()
     instrumentHit(5)
   }
@@ -133,7 +130,7 @@ function scheduleNote(beatNumber, time) {
       .querySelectorAll("button")
       [currentNote].getAttribute("aria-checked") === "true"
   ) {
-    lowtomMasterVol.connect(audio.destination)
+ 
     if (switchEnvBtn.checked == true) {
       lowtom1DeviceSpkr()
     } else {
@@ -147,7 +144,7 @@ function scheduleNote(beatNumber, time) {
       .querySelectorAll("button")
       [currentNote].getAttribute("aria-checked") === "true"
   ) {
-    hitomMasterVol.connect(audio.destination)
+  
     if (switchEnvBtn.checked == true) {
       hitom1DeviceSpkr()
     } else {
@@ -215,6 +212,14 @@ playButton.addEventListener("click", (ev) => {
     // check if audiocontext is in suspended state
     if (audio.state === "suspended") {
       audio.resume()
+      kickMasterVol.disconnect(audio.destination)
+      snareMasterVol.disconnect(audio.destination)
+      clapMasterVol.disconnect(audio.destination)
+      fingersnapMasterVol.disconnect(audio.destination)
+      hihatMasterVol.disconnect(audio.destination)
+      cymbalMasterVol.disconnect(audio.destination)
+      lowtomMasterVol.disconnect(audio.destination)
+      hitomMasterVol.disconnect(audio.destination)
     }
     // console.log(audio.state)
     // console.log(audio.baseLatency)
@@ -226,14 +231,5 @@ playButton.addEventListener("click", (ev) => {
   } else {
     window.clearTimeout(timerID)
     ev.target.dataset.playing = "false"
-
-    kickMasterVol.disconnect(audio.destination)
-    snareMasterVol.disconnect(audio.destination)
-    clapMasterVol.disconnect(audio.destination)
-    fingersnapMasterVol.disconnect(audio.destination)
-    hihatMasterVol.disconnect(audio.destination)
-    cymbalMasterVol.disconnect(audio.destination)
-    lowtomMasterVol.disconnect(audio.destination)
-    hitomMasterVol.disconnect(audio.destination)
   }
 })

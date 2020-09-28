@@ -1,7 +1,7 @@
 let fingersnapMasterVol = audio.createGain()
 let fSnapReverbGain = audio.createGain()
 let fSnapReverb = audio.createConvolver()
-let fSnapImpulse = "impulseresponseheslingtonchurch-002.wav"
+let fSnapImpulse = "Impulse_Response_PIPE_CARPET_2.wav"
 let fSnapReverbFilter = audio.createBiquadFilter()
 fSnapReverbFilter.type = "lowpass"
 fSnapReverbFilter.frequency.value = 3000
@@ -9,7 +9,6 @@ let fSnapFilter = audio.createBiquadFilter()
 fSnapFilter.type = "lowpass"
 
 fingersnapBtn.addEventListener("click", function () {
-  fingersnapMasterVol.connect(audio.destination)
   if (navigator.userAgent.indexOf("Firefox") != -1) {
     fingersnapSoundFF()
   } else {
@@ -21,7 +20,7 @@ fingersnapBtn.addEventListener("click", function () {
 fingersnapVolCtrl.addEventListener(
   "input",
   function () {
-    fingersnapMasterVol.gain.value = this.value
+    // fingersnapMasterVol.gain.value = this.value
   },
   false
 )
@@ -29,7 +28,7 @@ fingersnapVolCtrl.addEventListener(
 fSnapFilterCtrl.addEventListener(
   "input",
   function () {
-    fSnapFilter.frequency.value = this.value
+    // fSnapFilter.frequency.value = this.value
   },
   false
 )
@@ -53,20 +52,19 @@ function fingersnapSound() {
     for (let i = 0; i < bufferSize; i++) {
       output[i] = Math.random() * 2 - 1
     }
-
     noise.buffer = buffer
+
     let attack = 0,
       decay = 8,
       envelope = audio.createGain(),
-      gainStage1 = audio.createGain(),
-      gainStage2 = audio.createGain()
+      gainStage = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
     envelope.gain.linearRampToValueAtTime(0, audio.currentTime + decay / 1000)
 
-    gainStage1.gain.value = 2
-    gainStage2.gain.value = fingersnapVolCtrl.value
+    gainStage.gain.value = 2
+    fingersnapMasterVol.gain.value = fingersnapVolCtrl.value
 
     noiseFilter = audio.createBiquadFilter()
     noiseFilter.type = "highpass"
@@ -75,10 +73,9 @@ function fingersnapSound() {
 
     noise.connect(envelope)
     envelope.connect(noiseFilter)
-    noiseFilter.connect(gainStage1)
-    gainStage1.connect(gainStage2)
-    gainStage2.connect(fSnapFilter)
-    gainStage2.connect(fSnapReverbGain)
+    noiseFilter.connect(gainStage)
+    gainStage.connect(fSnapFilter)
+    gainStage.connect(fSnapReverbGain)
     fSnapFilter.connect(fingersnapMasterVol)
 
     noise.start(0)
@@ -93,8 +90,7 @@ function fingersnapSound() {
         decay = 5,
         osc = audio.createOscillator(),
         envelope = audio.createGain(),
-        gainStage1 = audio.createGain(),
-        gainStage2 = audio.createGain()
+        gainStage = audio.createGain()
 
       envelope.gain.setValueAtTime(0, audio.currentTime)
       envelope.gain.linearRampToValueAtTime(
@@ -108,23 +104,24 @@ function fingersnapSound() {
       fsnapHpF.type = "highpass"
       fsnapHpF.frequency.value = 8000
 
-      gainStage1.gain.value = 2
-      gainStage2.gain.value = fingersnapVolCtrl.value
+      gainStage.gain.value = 2
       fSnapFilter.frequency.value = fSnapFilterCtrl.value
+      fingersnapMasterVol.gain.value = fingersnapVolCtrl.value
 
       osc.connect(envelope)
       envelope.connect(fsnapHpF)
-      fsnapHpF.connect(gainStage1)
-      gainStage1.connect(gainStage2)
-      gainStage2.connect(fSnapReverbGain)
-      gainStage2.connect(fSnapFilter)
+      fsnapHpF.connect(gainStage)
+      gainStage.connect(fSnapReverbGain)
+      gainStage.connect(fSnapFilter)
       fSnapFilter.connect(fingersnapMasterVol)
-     
+
       osc.start(0)
       osc.stop(audio.currentTime + decay)
     }
     fsnapOsc()
   }, 25)
+
+  fingersnapMasterVol.connect(audio.destination)
 }
 
 function getImpulseFsnap() {
@@ -176,15 +173,14 @@ function fingersnapSoundFF() {
     let attack = 0,
       decay = 30,
       envelope = audio.createGain(),
-      gainStage1 = audio.createGain(),
-      gainStage2 = audio.createGain()
+      gainStage = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
     envelope.gain.linearRampToValueAtTime(0, audio.currentTime + decay / 1000)
 
-    gainStage1.gain.value = 5
-    gainStage2.gain.value = fingersnapVolCtrl.value
+    gainStage.gain.value = 5
+    fingersnapMasterVol.gain.value = fingersnapVolCtrl.value
 
     let noiseFilter = audio.createBiquadFilter()
     noiseFilter.type = "highpass"
@@ -193,12 +189,11 @@ function fingersnapSoundFF() {
 
     noise.connect(envelope)
     envelope.connect(noiseFilter)
-    noiseFilter.connect(gainStage1)
-    gainStage1.connect(gainStage2)
-    gainStage2.connect(fSnapFilter)
-    gainStage2.connect(fSnapReverbGain)
+    noiseFilter.connect(gainStage)
+    gainStage.connect(fSnapFilter)
+    gainStage.connect(fSnapReverbGain)
     fSnapFilter.connect(fingersnapMasterVol)
-   
+
     noise.start(0)
     noise.stop(audio.currentTime + decay)
   }
@@ -211,8 +206,7 @@ function fingersnapSoundFF() {
         decay = 20,
         osc = audio.createOscillator(),
         envelope = audio.createGain(),
-        gainStage1 = audio.createGain(),
-        gainStage2 = audio.createGain()
+        gainStage = audio.createGain()
 
       envelope.gain.setValueAtTime(0, audio.currentTime)
       envelope.gain.linearRampToValueAtTime(
@@ -226,21 +220,21 @@ function fingersnapSoundFF() {
       fsnapHpF.type = "highpass"
       fsnapHpF.frequency.value = 10000
 
-      gainStage1.gain.value = 6
-      gainStage2.gain.value = fingersnapVolCtrl.value
+      gainStage.gain.value = 6
+      fingersnapMasterVol.gain.value = fingersnapVolCtrl.value
       fSnapFilter.frequency.value = fSnapFilterCtrl.value
 
       osc.connect(envelope)
       envelope.connect(fsnapHpF)
-      fsnapHpF.connect(gainStage1)
-      gainStage1.connect(gainStage2)
-      gainStage2.connect(fSnapReverbGain)
-      gainStage2.connect(fSnapFilter)
+      fsnapHpF.connect(gainStage)
+      gainStage.connect(fSnapReverbGain)
+      gainStage.connect(fSnapFilter)
       fSnapFilter.connect(fingersnapMasterVol)
-    
+
       osc.start(0)
       osc.stop(audio.currentTime + decay)
     }
     fsnapOscFF()
   }, 30)
+  fingersnapMasterVol.connect(audio.destination)
 }

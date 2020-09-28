@@ -3,7 +3,6 @@ const snareSnap = audio.createGain()
 let snareDecayTime = 100
 
 snareBtn.addEventListener("click", function () {
-  snareMasterVol.connect(audio.destination)
   snare1()
   instrumentHit(1)
 })
@@ -11,7 +10,7 @@ snareBtn.addEventListener("click", function () {
 snareVolCtrl.addEventListener(
   "input",
   function () {
-    snareMasterVol.gain.value = this.value
+    // snareMasterVol.gain.value = this.value
   },
   false
 )
@@ -19,7 +18,7 @@ snareVolCtrl.addEventListener(
 snareSnapCtrl.addEventListener(
   "input",
   function () {
-    snareSnap.gain.value = this.value
+    // snareSnap.gain.value = this.value
   },
   false
 )
@@ -35,20 +34,20 @@ snareDecayCtrl.addEventListener(
 function snare1() {
   function snareWhiteNoise() {
     let noise = audio.createBufferSource()
-
+    
     let bufferSize = audio.sampleRate
+    
     let buffer = audio.createBuffer(1, bufferSize, audio.sampleRate)
     let output = buffer.getChannelData(0)
+ 
 
     for (let i = 0; i < bufferSize; i++) {
       output[i] = Math.random() * 2 - 1
     }
-
     noise.buffer = buffer
     let attack = 0,
       envelope = audio.createGain(),
-      gainStage1 = audio.createGain(),
-      gainStage2 = audio.createGain()
+      gainStage = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
@@ -57,8 +56,8 @@ function snare1() {
       0,
       audio.currentTime + snareDecayTime / 1000
     )
-    gainStage1.gain.value = 0.5
-    gainStage2.gain.value = snareVolCtrl.value
+    gainStage.gain.value = 0.5
+    snareMasterVol.gain.value = snareVolCtrl.value
 
     let snareNoiseFilter = audio.createBiquadFilter()
     snareNoiseFilter.type = "lowpass"
@@ -66,10 +65,8 @@ function snare1() {
 
     noise.connect(envelope)
     envelope.connect(snareNoiseFilter)
-    snareNoiseFilter.connect(gainStage1)
-    gainStage1.connect(gainStage2)
-
-    gainStage2.connect(snareMasterVol)
+    snareNoiseFilter.connect(gainStage)
+    gainStage.connect(snareMasterVol)
 
     noise.start(0)
     //noise.stop(0 + snareDecayTime)
@@ -81,8 +78,7 @@ function snare1() {
       decay = 5,
       osc = audio.createOscillator(),
       envelope = audio.createGain(),
-      gainStage1 = audio.createGain(),
-      gainStage2 = audio.createGain()
+      gainStage = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
@@ -93,17 +89,16 @@ function snare1() {
     snareHpF.type = "highpass"
     snareHpF.frequency.value = 1300
 
-    gainStage1.gain.value = 1
-    gainStage2.gain.value = snareVolCtrl.value
+    gainStage.gain.value = 1
     snareSnap.gain.value = snareSnapCtrl.value
+    snareMasterVol.gain.value = snareVolCtrl.value
 
     osc.connect(envelope)
     envelope.connect(snareHpF)
-    snareHpF.connect(gainStage1)
-    gainStage1.connect(gainStage2)
-    gainStage2.connect(snareSnap)
+    snareHpF.connect(gainStage)
+    gainStage.connect(snareSnap)
     snareSnap.connect(snareMasterVol)
-  
+
     osc.start(0)
     osc.stop(audio.currentTime + decay)
   }
@@ -113,8 +108,7 @@ function snare1() {
       decay = 80,
       osc = audio.createOscillator(),
       envelope = audio.createGain(),
-      gainStage1 = audio.createGain(),
-      gainStage2 = audio.createGain()
+      gainStage = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
@@ -125,17 +119,16 @@ function snare1() {
     osc.frequency.value = 300
     osc.type = "sine"
 
-    gainStage1.gain.value = 3
-    gainStage2.gain.value = snareVolCtrl.value
+    gainStage.gain.value = 3
     snareSnap.gain.value = snareSnapCtrl.value
+    snareMasterVol.gain.value = snareVolCtrl.value
 
     osc.connect(envelope)
     envelope.connect(snareHpF2)
-    snareHpF2.connect(gainStage1)
-    gainStage1.connect(gainStage2)
-    gainStage2.connect(snareSnap)
+    snareHpF2.connect(gainStage)
+    gainStage.connect(snareSnap)
     snareSnap.connect(snareMasterVol)
- 
+
     osc.start(0)
     osc.stop(audio.currentTime + decay)
   }
@@ -143,4 +136,5 @@ function snare1() {
   snareWhiteNoise()
   smack()
   body()
+  snareMasterVol.connect(audio.destination)
 }

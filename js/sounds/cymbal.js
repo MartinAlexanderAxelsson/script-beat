@@ -3,26 +3,13 @@ const cymbalBell = audio.createGain()
 let cymbalDecayTime = 1000
 
 cymbalBtn.addEventListener("click", function () {
-  cymbalMasterVol.connect(audio.destination)
   cymbal1()
   instrumentHit(5)
 })
 
-cymbalVolCtrl.addEventListener(
-  "input",
-  function () {
-    cymbalMasterVol.gain.value = this.value
-  },
-  false
-)
+cymbalVolCtrl.addEventListener("input", function () {}, false)
 
-cymbalBellCtrl.addEventListener(
-  "input",
-  function () {
-    cymbalBell.gain.value = this.value
-  },
-  false
-)
+cymbalBellCtrl.addEventListener("input", function () {}, false)
 
 cymbalDecayCtrl.addEventListener(
   "input",
@@ -43,13 +30,12 @@ function cymbal1() {
     for (let i = 0; i < bufferSize; i++) {
       output[i] = Math.random() * 2 - 1
     }
-
     noise.buffer = buffer
+
     let attack = 0,
       decay = 10,
       envelope = audio.createGain(),
-      gainStage1 = audio.createGain(),
-      gainStage2 = audio.createGain()
+      gainStage = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
@@ -58,14 +44,13 @@ function cymbal1() {
     cymbalHpFilter.type = "highpass"
     cymbalHpFilter.frequency.value = 8000
 
-    gainStage1.gain.value = 2
-    gainStage2.gain.value = hihatVolCtrl.value
+    gainStage.gain.value = 1
+    cymbalMasterVol.gain.value = cymbalVolCtrl.value
 
     noise.connect(envelope)
     envelope.connect(cymbalHpFilter)
-    cymbalHpFilter.connect(gainStage1)
-    gainStage1.connect(gainStage2)
-    gainStage2.connect(cymbalMasterVol)
+    cymbalHpFilter.connect(gainStage)
+    gainStage.connect(cymbalMasterVol)
 
     noise.start(0)
     noise.stop(audio.currentTime + decay)
@@ -80,8 +65,7 @@ function cymbal1() {
       hPFilter = audio.createBiquadFilter(),
       bPFilter = audio.createBiquadFilter(),
       envelope = audio.createGain(),
-      gainStage1 = audio.createGain(),
-      gainStage2 = audio.createGain()
+      gainStage = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
@@ -97,8 +81,8 @@ function cymbal1() {
     bPFilter.type = "bandpass"
     bPFilter.frequency.value = 8000
 
-    gainStage1.gain.value = 3
-    gainStage2.gain.value = cymbalVolCtrl.value
+    gainStage.gain.value = 3
+    cymbalMasterVol.gain.value = cymbalVolCtrl.value
 
     ratios.forEach(function (ratio) {
       let osc4 = audio.createOscillator()
@@ -108,9 +92,8 @@ function cymbal1() {
       osc4.connect(envelope)
       envelope.connect(hPFilter)
       hPFilter.connect(bPFilter)
-      bPFilter.connect(gainStage1)
-      gainStage1.connect(gainStage2)
-      gainStage2.connect(cymbalMasterVol)
+      bPFilter.connect(gainStage)
+      gainStage.connect(cymbalMasterVol)
 
       osc4.start(0)
       //   osc4.stop(0 + cymbalDecayTime)
@@ -123,8 +106,7 @@ function cymbal1() {
       bellFilter = audio.createBiquadFilter(),
       osc = audio.createOscillator(),
       envelope = audio.createGain(),
-      gainStage1 = audio.createGain(),
-      gainStage2 = audio.createGain()
+      gainStage = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
@@ -135,14 +117,14 @@ function cymbal1() {
     bellFilter.type = "highpass"
     bellFilter.frequency.value = 8000
 
-    gainStage1.gain.value = 1
-    gainStage2.gain.value = cymbalVolCtrl.value
+    gainStage.gain.value = 1
+    cymbalBell.gain.value = cymbalBellCtrl.value
+    cymbalMasterVol.gain.value = cymbalVolCtrl.value
 
     osc.connect(envelope)
     envelope.connect(bellFilter)
-    bellFilter.connect(gainStage1)
-    gainStage1.connect(gainStage2)
-    gainStage2.connect(cymbalBell)
+    bellFilter.connect(gainStage)
+    gainStage.connect(cymbalBell)
     cymbalBell.connect(cymbalMasterVol)
 
     osc.start(0)
@@ -152,4 +134,5 @@ function cymbal1() {
   cymbalWhiteNoise()
   ring()
   bell()
+  cymbalMasterVol.connect(audio.destination)
 }

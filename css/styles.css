@@ -1003,7 +1003,7 @@ input:checked + .main-ctrls__sound-outpt-switch__slider:before {
 
 @media (min-width: 1000px) {
   .range-input::-webkit-slider-thumb {
-    border: 0.2vw solid var(--darkGrey);
+    border: 0.25vw solid var(--darkGrey);
     height: 1vw;
     width: 1vw;
     margin-top: -0.4vw;
@@ -1032,7 +1032,7 @@ input:checked + .main-ctrls__sound-outpt-switch__slider:before {
 
 @media (min-width: 1000px) {
   .range-input2::-webkit-slider-thumb {
-    border: 0.2vw solid var(--btnBlue);
+    border: 0.25vw solid var(--btnBlue);
     height: 1vw;
     width: 1vw;
     margin-top: -0.4vw;

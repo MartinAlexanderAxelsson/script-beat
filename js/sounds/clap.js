@@ -4,32 +4,21 @@ let clapTone = audio.createBiquadFilter()
 clapTone.type = "lowpass"
 let clapReverbGain = audio.createGain()
 let clapReverb = audio.createConvolver()
-let clapImpulse = "impulseresponseheslingtonchurch-002.wav"
+// let clapImpulse = "impulseresponseheslingtonchurch-002.wav"
+let clapImpulse = "Impulse_Response_PIPE_CARPET.wav"
 let clapReverbFilter = audio.createBiquadFilter()
 clapReverbFilter.type = "lowpass"
-clapReverbFilter.frequency.value = 3000
+// clapReverbFilter.frequency.value = 3000
+clapReverbFilter.frequency.value = 5000
 
 clapBtn.addEventListener("click", function () {
-  clapMasterVol.connect(audio.destination)
   clap1()
   instrumentHit(2)
 })
 
-clapVolCtrl.addEventListener(
-  "input",
-  function () {
-    clapMasterVol.gain.value = this.value
-  },
-  false
-)
+clapVolCtrl.addEventListener("input", function () {}, false)
 
-clapToneCtrl.addEventListener(
-  "input",
-  function () {
-    clapTone.frequency.value = this.value
-  },
-  false
-)
+clapToneCtrl.addEventListener("input", function () {}, false)
 
 clapDecayCtrl.addEventListener(
   "input",
@@ -50,12 +39,9 @@ function clap1() {
     for (var i = 0; i < bufferSize; i++) {
       output[i] = Math.random() * 2 - 1
     }
-
     noise.buffer = buffer
-
     let attack = 0,
-      envelope = audio.createGain(),
-      gainStage = audio.createGain()
+      envelope = audio.createGain()
 
     envelope.gain.setValueAtTime(0, audio.currentTime)
     envelope.gain.linearRampToValueAtTime(1, audio.currentTime + attack / 1000)
@@ -67,15 +53,14 @@ function clap1() {
     clapHpF.type = "highpass"
     clapHpF.frequency.value = 1000
     clapTone.frequency.value = clapToneCtrl.value
-    gainStage.gain.value = clapVolCtrl.value
+    clapMasterVol.gain.value = clapVolCtrl.value
 
     noise.connect(envelope)
     envelope.connect(clapHpF)
-    clapHpF.connect(gainStage)
-    gainStage.connect(clapTone)
-    gainStage.connect(clapReverbGain)
+    clapHpF.connect(clapTone)
+    clapTone.connect(clapReverbGain)
     clapTone.connect(clapMasterVol)
-   
+
     noise.start(0)
     //noise.stop(0 + clapDecayTime)
   }
@@ -92,12 +77,10 @@ function clap1() {
       for (var i = 0; i < bufferSize; i++) {
         output[i] = Math.random() * 2 - 1
       }
-
       noise.buffer = buffer
 
       let attack = 0,
-        envelope = audio.createGain(),
-        gainStage = audio.createGain()
+        envelope = audio.createGain()
 
       envelope.gain.setValueAtTime(0, audio.currentTime)
       envelope.gain.linearRampToValueAtTime(
@@ -112,20 +95,21 @@ function clap1() {
       clapHpF2.type = "highpass"
       clapHpF2.frequency.value = 2000
       clapTone.frequency.value = clapToneCtrl.value
-      gainStage.gain.value = clapVolCtrl.value
+      clapMasterVol.gain.value = clapVolCtrl.value
 
       noise.connect(envelope)
       envelope.connect(clapHpF2)
-      clapHpF2.connect(gainStage)
-      gainStage.connect(clapTone)
-      gainStage.connect(clapReverbGain)
+      clapHpF2.connect(clapTone)
+      clapTone.connect(clapReverbGain)
       clapTone.connect(clapMasterVol)
-    
+
       noise.start(0)
-    //   noise.stop(0 + clapDecayTime)
+      //   noise.stop(0 + clapDecayTime)
     }
     clapWhiteNoise2()
   }, 10)
+
+  clapMasterVol.connect(audio.destination)
 }
 
 function getImpulseClap() {
