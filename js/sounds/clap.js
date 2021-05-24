@@ -29,6 +29,7 @@ clapDecayCtrl.addEventListener(
 )
 
 function clap1() {
+  
   function clapWhiteNoise() {
     let clapHpF = audio.createBiquadFilter()
     let noise = audio.createBufferSource()
